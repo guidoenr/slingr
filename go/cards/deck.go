@@ -39,3 +39,9 @@ func newDeck() deck {
 	}
 	return cards
 }
+
+// with (deck, deck) we are telling to go to return 2 type of values
+// two decks
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}

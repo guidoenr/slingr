@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // deckSize := 20
 // variables can be initialized outside of a function, but cannot be assigned a variable
 // the correct way will be deckSize
@@ -26,9 +28,15 @@ func main() {
 	// SLICE: an array that can grow or shrink (every element must be of the same type)
 
 	// --------------------------------- using the deck.go
-	cards := newDeck()
-	cards.print()
 
+	//cards[0:2].print() // cards[startIndexIncluding : upToNotIncluding] , this also works like cards[:2]
+	// and the reverse will be [2:] this returns everything in the right of 2
+
+	cards := newDeck()
+	hand, remainingDeck := deal(cards, 5)
+	hand.print()
+	fmt.Println("---------------remaining deck: ")
+	remainingDeck.print()
 }
 
 // always put the data type in return-type func
