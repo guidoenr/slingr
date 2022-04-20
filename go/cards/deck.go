@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
+)
 
 // create a new type of 'deck'
 // which is a slice of strings
@@ -44,4 +49,27 @@ func newDeck() deck {
 // two decks
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
+}
+
+/*
+["red", "yellow", "blue"] -> "red, yellow, blue"
+*/
+func (d deck) toString() string {
+	return strings.Join([]string(d), ", ")
+}
+
+// note that the 'error' type its placed here because the
+// writeFile function of GO also returns an error, this will be
+// very usefull if we want to handle exceptions
+func (d deck) saveToFile(filename string) error {
+	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+}
+
+func newDeckFromFile(filename string) (deck error) {
+	byteSlice, err := ioutil.ReadFile(filename)
+
+	if err != nil { // if err != nill means that there wasn't an error
+		fmt.Println("Error:", err)
+		os.Exit(-1) // exit the program with -1 value
+	}
 }

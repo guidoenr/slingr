@@ -33,10 +33,20 @@ func main() {
 	// and the reverse will be [2:] this returns everything in the right of 2
 
 	cards := newDeck()
-	hand, remainingDeck := deal(cards, 5)
-	hand.print()
-	fmt.Println("---------------remaining deck: ")
-	remainingDeck.print()
+	// hand, remainingDeck := deal(cards, 5)
+	//hand.print()
+	// fmt.Println("---------------remaining deck: ")
+	// remainingDeck.print()
+
+	// ------ BYTE SLICE: a string represented in a computer [72 105 32 116 104 101 114 101 33]
+	//byteSlice := []byte("Hi There") // this is the way to cast a string to a byte Slice
+	//fmt.Println(byteSlice)
+
+	string_cards := cards.toString()
+	fmt.Println(string_cards)
+
+	cards.saveToFile("cards.dat")
+
 }
 
 // always put the data type in return-type func
@@ -44,7 +54,8 @@ func newCard() string {
 	return "Five of diamonds"
 }
 
+
 /*
 GO is NOT and oriented object language
-
+- its static
 */
