@@ -21,6 +21,21 @@ func (d deck) print() {
 }
 
 // return a list of cards : deck
-func newDeck() {
-	
+// we don't add any receiver in this function because
+// we're not working with an existing deck, what we are doing right here
+// its basically return a new deck
+func newDeck() deck {
+	cards := deck{}
+
+	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Cloud"}
+	cardValues := []string{"Ace", "Two", "Three", "Four"}
+
+	// use '_' when we don't want to use the index variable
+	// never use only a one variable
+	for _, suit := range cardSuits {
+		for _, value := range cardValues {
+			cards = append(cards, value+" of "+suit)
+		}
+	}
+	return cards
 }

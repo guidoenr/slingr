@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // deckSize := 20
 // variables can be initialized outside of a function, but cannot be assigned a variable
 // the correct way will be deckSize
@@ -26,17 +24,11 @@ func main() {
 	// ----- ARRAYS - SLICE ------- //
 	// ARRAY: fixed length list of things
 	// SLICE: an array that can grow or shrink (every element must be of the same type)
-	cards := []string{"Ace of diamonds", newCard()} //slice
-	cards = append(cards, "Six of Spades")
-
-	for i, card := range cards {
-		fmt.Println(i, card)
-	}
 
 	// --------------------------------- using the deck.go
-	kards := deck{"One Card", "Another card"}
+	cards := newDeck()
+	cards.print()
 
-	kards.print()
 }
 
 // always put the data type in return-type func
