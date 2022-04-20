@@ -14,14 +14,29 @@ func main() {
 		that GO automaticlly infers the variable type (string)
 		and this line, also works for initializing and assigning a new value to a variable
 	*/
-	card := "Ace of spades" // MOST USED
+	//card := "Ace of spades" // MOST USED
 	// the ':=' its only used when we are declaring and defining a new variable in one line
 	// if we use only the '=' we are making an assigment to an existing variable
 	//card = "Five of Diamonds"
-	new_card := newCard()
+	//new_card := newCard()
 
-	fmt.Println(new_card)
-	fmt.Println(card)
+	//fmt.Println(new_card)
+	//fmt.Println(card)
+
+	// ----- ARRAYS - SLICE ------- //
+	// ARRAY: fixed length list of things
+	// SLICE: an array that can grow or shrink (every element must be of the same type)
+	cards := []string{"Ace of diamonds", newCard()} //slice
+	cards = append(cards, "Six of Spades")
+
+	for i, card := range cards {
+		fmt.Println(i, card)
+	}
+
+	// --------------------------------- using the deck.go
+	kards := deck{"One Card", "Another card"}
+
+	kards.print()
 }
 
 // always put the data type in return-type func
@@ -29,4 +44,7 @@ func newCard() string {
 	return "Five of diamonds"
 }
 
+/*
+GO is NOT and oriented object language
 
+*/
