@@ -46,14 +46,14 @@ func main() {
 	fmt.Println(string_cards)
 
 	cards.saveToFile("cards.dat")
-
+	deckFromFile := newDeckFromFile("cardss.dat")
+	fmt.Println(deckFromFile)
 }
 
 // always put the data type in return-type func
 func newCard() string {
 	return "Five of diamonds"
 }
-
 
 /*
 GO is NOT and oriented object language

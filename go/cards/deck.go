@@ -65,11 +65,15 @@ func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
 }
 
-func newDeckFromFile(filename string) (deck error) {
+func newDeckFromFile(filename string) deck {
 	byteSlice, err := ioutil.ReadFile(filename)
 
 	if err != nil { // if err != nill means that there wasn't an error
 		fmt.Println("Error:", err)
-		os.Exit(-1) // exit the program with -1 value
+		os.Exit(1) // exit the program with -1 value
 	}
+
+	// because we want a string
+	s := strings.Split(string(byteSlice), ",")
+	return deck(s)
 }
