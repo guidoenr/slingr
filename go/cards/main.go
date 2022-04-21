@@ -46,8 +46,15 @@ func main() {
 	fmt.Println(string_cards)
 
 	cards.saveToFile("cards.dat")
+
+	// if we put an invalid filename, that will throws the error with Exit(1)
 	deckFromFile := newDeckFromFile("cardss.dat")
 	fmt.Println(deckFromFile)
+
+	// shuffle - random
+	kards2 := newDeck()
+	kards2.shuffle()
+	kards2.print()
 }
 
 // always put the data type in return-type func
