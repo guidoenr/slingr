@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // create a new type of 'deck'
@@ -80,10 +81,16 @@ func newDeckFromFile(filename string) deck {
 }
 
 func (d deck) shuffle() {
+
+	// using a seed that changes by the current dateTime, so the seed
+	// will be different everytime that we start our program
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source) // r = a Rand type
+
 	for index := range d {
 		// this will generate a random number between 0 and the deck's length
-		newPosition := rand.Intn(len(d) - 1)
-		d[i], d[newPosition] = d[newPosition], d[i] // a simple double assignement for swap
+		newPosition := r.Intn(len(d) - 1)
+		d[index], d[newPosition] = d[newPosition], d[index] // a simple double assignement for swap
 
 	}
 }

@@ -48,7 +48,7 @@ func main() {
 	cards.saveToFile("cards.dat")
 
 	// if we put an invalid filename, that will throws the error with Exit(1)
-	deckFromFile := newDeckFromFile("cardss.dat")
+	deckFromFile := newDeckFromFile("cards.dat")
 	fmt.Println(deckFromFile)
 
 	// shuffle - random
