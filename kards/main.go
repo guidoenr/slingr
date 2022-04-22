@@ -40,6 +40,48 @@ func main() {
 	johnPointer.updateName("newName")
 
 	john.print()
+
+	/* VALUE TYPES vs REFERENCE TYPES
+	Value types: here, we got to use pointers to be able
+	to change their value in a function
+	[int, float, string, bool, structs]
+
+	Reference Types: and here, we don't have to worry
+	about pointers
+	[slices ,maps, channels, pointers, functions ]
+
+	*/
+
+	//------------------ MAPS -------------------- //
+	/*
+	   map:
+	   	key -> value
+	   	key -> value
+
+	   we could think that a Map in Go it's very similar to exactly
+	   a Map in Python ;)
+	*/
+
+	colors := map[string]string{
+		"red":  "ff0000",
+		"blue": "0000ff",
+	}
+	// we can also define an empty map as:
+	// colors := make(map[string]string)
+	colors["white"] = "ffffff" //adding a key to the map
+	fmt.Println(colors)
+
+	// delete the element
+	delete(colors, "white")
+
+	printMap(colors)
+
+}
+
+func printMap(c map[string]string) {
+	for color, hex := range c {
+		fmt.Println("Hex code for", color, "is", hex)
+	}
 }
 
 // a receiver with a struct
