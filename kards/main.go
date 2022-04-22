@@ -30,6 +30,10 @@ func main() {
 			zipCode: 1337,
 		},
 	}
+	/* POINTERS:
+	&variable = memory address of the value this variable it's pointing at
+	*pointer = the value this memory address it's pointing at
+	*/
 
 	// this is the pointer to john
 	johnPointer := &john
