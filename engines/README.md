@@ -39,6 +39,11 @@ e.g: `Engine ID: d170ec61-6898-4b20-89bd-0e3e4ed56b0b`
 2. Do a `make build`
 3. Do a `make up-test`
 4. Go to http://localhost:9090
+5. You will notice that in the localhost:9090 site there is a `cacheURI` form
+![](2022-04-25-11-42-32.png) \
+You got to put the URI to download the test file for the current engine, it might be
+a text-extraction sample, a biometric, etc.
+6. The `MIME type` field contains the type for the file to analyze, in this case will be `text/plain`
 
 ---
 
