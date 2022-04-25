@@ -14,4 +14,6 @@ func main() {
 	}
 	fmt.Println(resp)
 
+	// note, the resp.Body it's a io.ReadCloser interface type
+	// it could be a io.Reader or a io.Closer interface
 }

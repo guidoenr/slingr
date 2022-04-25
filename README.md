@@ -1,7 +1,7 @@
-# Slingr.io
+# <ins>Slingr.io | veritone</ins>
 ### setups - go course - and more..
 `author: @guidoenr`
 
 ---
 
-# **Go** | Goland | linux env
+# Goland | linux env | Engines
