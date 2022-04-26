@@ -76,3 +76,8 @@ func (englishBot) whoAmI() string {
 func (englishBot) respondToUser(u user) string {
 	return "Hello " + u.name
 }
+
+// -READER INTERFACE:
+// the reader interface can receive several type of data
+// and then create an output date of type []byte that anyone
+// can work with it

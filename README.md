@@ -4,4 +4,10 @@
 
 ---
 
-# Goland | linux env | Engines
+# Engines | Goland | linux env 
+
+# Debian Environment
+```bash
+$ sudo chmod 777 /var/run/docker.sock
+
+```
