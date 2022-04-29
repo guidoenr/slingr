@@ -7,10 +7,12 @@
 # Engines | Goland | linux env 
 
 # Debian Environment
-```bash
-$ sudo chmod 777 /var/run/docker.sock
+If `make build` doesn't work for a permissions errors,type: \
+`-sudo chmod 777 /var/run/docker.sock`
 
-```
+If `CTRL+C` doesn't kill the test at localhost:9090
+`docker stop $containerId + docker rm $containerId`
+
 
 ## GRAPHQL
 
