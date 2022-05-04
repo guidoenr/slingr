@@ -21,6 +21,30 @@ docker rm $containerId
 
 ---
 
+## TEST Engine locally inside the Google VM 
+* Generate Public keys for ssh
+```bash
+cd ~/.ssh
+ssh-keygen -t rsa -b 4096
+ssh-copy-id -i ~/.ssh/id_rsa.pub guido@debian # this copy the keys for guido@debian
+```
+
+
+* If you want to run it locally, a small modification needs to be done in main.go 
+in line 200.
+```go
+Replace:
+filePath := config.ImageDirectory + chunkInfo.ChunkUUID
+For:
+filePath := config.ImageDirectory + "temporary"
+```
+* Once in the Google VM terminal, run make `up-test` and in another VM terminal window make the request as follows:
+```bash
+curl "Content-Type: multipart/form-data" -F "startOffsetMS=1000" -F "endOffsetMS=2000" -F "cacheURI=https://storage.googleapis.com/artifacts.veritone-334718.appspot.com/containers/Globo/google-label-video.mp4" -F "payload={\"applicationId\":\"applicationId\",\"recordingId\":\"recordingId\",\"jobId\":\"jobId\",\"taskId\":\"taskId\",\"token\":\"token\",\"mode\":\"mode\",\"libraryId\":\"libraryId\",\"libraryEngineModelId\":\"libraryEngineModelId\",\"veritoneApiBaseUrl\":\"https://api.veritone.com\",\"UseGoogleServiceAccount\":\"true\"}" http://0.0.0.0:8080/process
+```
+
+
+
 
 ## GRAPHQL
 
@@ -147,3 +171,21 @@ mutation {
   }
 }
 ```
+
+```go
+
+type ClientConnection struct {
+  videoClient *video.Client
+  storageClient *storage.Client
+ }
+
+func getClientConnection (...) (*video.Client, *storage.Client){
+  if isGoogleServiceAccount(payload){
+    videoClient := newClient("withoutCredentials")
+    storageClient := newClient("withoutCredentials")
+  } else {
+    jsonCreds := getJSONCreds()
+    storageClient := newClient(withCredentials())
+    videClient := newClient(withCredentials())
+  }
+}
