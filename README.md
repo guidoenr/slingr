@@ -20,6 +20,13 @@ docker rm $containerId
 
 
 ---
+## vtn-test-files
+- Upload files .txt, .html, to the repo in the correct folder
+- https://github.com/veritone/vtn-test-files
+in `venti.json` put 
+- https://vtn-dev-test-files.s3.amazonaws.com/text/html/sentiment/sentiment.html
+
+
 
 ## TEST Engine locally inside the Google VM 
 * Generate Public keys for ssh
