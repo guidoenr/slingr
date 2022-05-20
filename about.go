@@ -20,17 +20,3 @@ func main() {
 	fmt.Println("Hi there!")
 }
 
-/*
-
-go build -> compiles a bunch of go source code files, and creates a executable 'main' file in the dir
-and it can be runned with $ ./main
-
-go run -> compiles and executes on or two fiels
-
-go fmt -> fomrats all thhe code in each file in the current directory
-
-go install -> compiles and installs a package [like maven]
-
-go get -> downloads the raw source code [like maven]
-
-*/
