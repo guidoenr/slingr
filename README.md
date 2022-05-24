@@ -56,7 +56,7 @@ curl "Content-Type: multipart/form-data" -F "startOffsetMS=1000" -F "endOffsetMS
 ## GRAPHQL
 
 ### Get Engine Output
-```json
+```js
 query getEngineOutputBad {
   engineResults(jobId:"22041726_0VKkAZDQ13") {
     records {
@@ -71,34 +71,32 @@ query getEngineOutputBad {
   }
 }
 ```
-### Create Job
-```graphql
+### Create Job Video
+```js
+# Write your query or mutation here
 mutation {
-  createJob(
+  createJobVideo(
     input: {
       target: { status: "downloaded" }
+      ## Tasks
       tasks: [
         {
-          ## Webstream Adapter V3F
+          ## Webstream 
           engineId: "9e611ad7-2d3b-48f6-a51b-0a1ba40fe255"
           payload: {
-            url: "https://storage.googleapis.com/artifacts.veritone-334718.appspot.com/containers/Globo/google-label-video.mp4"
+            url: "https://storage.googleapis.com/artifacts.veritone-334718.appspot.com/containers/Celebrity_recognition/tom_holland.mp4"
           }
-          executionPreferences: {}
+          executionPreferences: {
+            priority: -95
+          }
           ioFolders: [{ referenceId: "wsa-output", mode: stream, type: output }]
-        }
-        {
-          ## SI2 Playback segment creator V3F
-          engineId: "352556c7-de07-4d55-b33f-74b1cf237f25"
-          executionPreferences: { parentCompleteBeforeStarting: true }
-          ioFolders: [{ referenceId: "pb-input", mode: stream, type: input }]
         }
         {
           ## SI2 audio/video Chunk creator V3F
           engineId: "8bdb0e3b-ff28-4f6e-a3ba-887bd06e6440"
           payload: {
-            ffmpegTemplate: "video"
-            customFFMPEGProperties: { chunkSizeInSeconds: "300" }
+            ffmpegTemplate: "frame"
+            customFFMPEGProperties: { framesPerSecond: "1" }
           }
           executionPreferences: { parentCompleteBeforeStarting: true }
           ioFolders: [
@@ -107,10 +105,9 @@ mutation {
           ]
         }
         {
-          ## Google - Label Detection
-          engineId: "148213eb-ccda-42fc-9ad6-7c5159acc798"
+          ## YOUR CUSTOM ENGINE GOES HERE
+          engineId: "b5f16955-93fb-4649-8958-9e4e52fba13f"
           executionPreferences: { parentCompleteBeforeStarting: true }
-          }
           ioFolders: [
             { referenceId: "engine-input", mode: chunk, type: input }
             { referenceId: "engine-output", mode: chunk, type: output }
@@ -123,11 +120,8 @@ mutation {
           ioFolders: [{ referenceId: "ow-input", mode: chunk, type: input }]
         }
       ]
+      ##Routes
       routes: [
-        {
-          parentIoFolderReferenceId: "wsa-output"
-          childIoFolderReferenceId: "pb-input"
-        }
         {
           parentIoFolderReferenceId: "wsa-output"
           childIoFolderReferenceId: "si-input"
@@ -145,14 +139,14 @@ mutation {
   ) {
     id
     targetId
-    clusterId
+    createdDateTime
   }
 }
 
 ```
 
-### job
-```graphql
+### jobStatus
+```js
 # bad cred
 {
   job(id: "22041726_0VKkAZDQ13") {
