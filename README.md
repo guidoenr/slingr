@@ -57,7 +57,7 @@ curl "Content-Type: multipart/form-data" -F "startOffsetMS=1000" -F "endOffsetMS
 
 ### Get Engine Output
 ```js
-query getEngineOutputBad {
+query getEngineOutput {
   engineResults(jobId:"22041726_0VKkAZDQ13") {
     records {
       tdoId
