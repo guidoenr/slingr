@@ -10,6 +10,7 @@
 * **`make build`** doesn't work for a permissions errors, type: 
 ```go
 sudo chmod 777 /var/run/docker.sock
+DOCKER_BUILDKIT=0
 ```
 
 * **CTRL+C** doesn't kill the test at localhost:9090
@@ -175,18 +176,29 @@ mutation {
 
 ```go
 
-type ClientConnection struct {
-  videoClient *video.Client
-  storageClient *storage.Client
- }
+ 
+func checkGoogleComputing() error {
+	// check if there is metadata from the google VM
+	IsGCE := metadata.OnGCE()
+	log.Println("User in GCE: ", IsGCE)
 
-func getClientConnection (...) (*video.Client, *storage.Client){
-  if isGoogleServiceAccount(payload){
-    videoClient := newClient("withoutCredentials")
-    storageClient := newClient("withoutCredentials")
-  } else {
-    jsonCreds := getJSONCreds()
-    storageClient := newClient(withCredentials())
-    videClient := newClient(withCredentials())
-  }
+	if IsGCE == false {
+		err := errors.New("no google VM metadata found. Google Cloud Platform is unavailable")
+		return err
+
+	} else {
+		log.Printf("google VM metadata found. Verified we are running inside the Google Cloud Platform")
+		return nil
+	}
+}
+
+func UsingGoogleServiceAccount(payload models.JobChunk) bool {
+	if payload.UseGoogleServiceAccount == "true" {
+		err := checkGoogleComputing()
+		if err != nil {
+			return false
+		}
+		return true
+	}
+	return false
 }
