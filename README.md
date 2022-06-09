@@ -9,8 +9,9 @@
 # Debian Environment
 * **`make build`** doesn't work for a permissions errors, type: 
 ```go
-sudo chmod 777 /var/run/docker.sock
-DOCKER_BUILDKIT=0
+- sudo chmod 777 /var/run/docker.sock
+- DOCKER_BUILDKIT=0/1 (in dockerFile)
+- use `gnome-terminal` instead of golang terminal
 ```
 
 * **CTRL+C** doesn't kill the test at localhost:9090
