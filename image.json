@@ -1,0 +1,78 @@
+mutation {
+    createJob(
+      input: {
+        target: { status:"downloaded" }
+        ## Tasks
+        tasks: [
+          {
+            # Stream Ingestor: read the input as a raw file
+            engineId: "8bdb0e3b-ff28-4f6e-a3ba-887bd06e6440"  
+            payload:{ 
+              url: "https://vtn-dev-test-files.s3.amazonaws.com/media/image/ocr-numbers.png"
+              ffmpegTemplate: "rawchunk" 
+            }
+            executionPreferences: { priority: -82, parentCompleteBeforeStarting: true }
+            ioFolders: [
+              { referenceId: "si-out", mode: chunk, type: output }
+            ]
+          }
+          {
+            # Engine that expects an image file as input
+            engineId: "d66f553d-3cef-4c5a-9b66-3e551cc48b4b"
+            executionPreferences: { priority: -82, parentCompleteBeforeStarting: true }
+            ioFolders: [
+              { referenceId: "engine-in", mode: chunk, type: input } 
+              { referenceId: "engine-out", mode: chunk, type: output } 
+            ]
+          }
+          {
+            # Output Writer: store the cognition results in the TDO
+            engineId: "8eccf9cc-6b6d-4d7d-8cb3-7ebf4950c5f3"  
+            executionPreferences: { priority: -82, parentCompleteBeforeStarting: true }
+            ioFolders: [
+              { referenceId: "ow-in", mode: chunk, type: input } 
+            ]
+          }
+        ]
+  
+        ## Routes
+        routes: [
+          { ## StreamIngestor --> engine
+            parentIoFolderReferenceId: "si-out"
+            childIoFolderReferenceId: "engine-in"
+            options: {}
+          }
+          {  ## engine  --> OutputWriter
+            parentIoFolderReferenceId: "engine-out"
+            childIoFolderReferenceId: "ow-in"
+            options: {}
+          }
+        ]
+      }
+  )
+    {
+      targetId
+      id
+      targetId
+      clusterId
+      tasks {
+        records {
+          id
+          engineId
+          payload
+          taskPayload
+          status
+          output
+          ioFolders {
+            referenceId
+            type
+            mode
+          }
+        }
+      }
+      routes {
+        parentIoFolderReferenceId
+        childIoFolderReferenceId
+      }
+    }
+  }
