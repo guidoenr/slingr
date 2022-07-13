@@ -1,4 +1,6 @@
 # ------------------------------------ VIDEO - CHUNK
+# BATCH: e2af313b-9ae7-4a2c-83d3-6e5946ba618a
+# ENTITY EXTRACTION: 6443ff70-5a3a-4d9b-9e98-3090de018c75
 mutation {
     createJob(input:
     {
@@ -58,8 +60,8 @@ mutation {
           }
         ]
       },
-      {
-        engineId: "1e5b4e36-acbe-49f1-bebf-1d3a0edd6219",
+      { # ENGINE THAT EXPECT A VIDEO AS INPUT
+        engineId: "6443ff70-5a3a-4d9b-9e98-3090de018c75",
         executionPreferences: {
           parentCompleteBeforeStarting: true
         },
