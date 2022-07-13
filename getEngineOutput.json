@@ -1,0 +1,15 @@
+# GET ENGINE OUTPUT
+query getEngineOutput {
+    engineResults(jobId:"22072812_dx1ZrpOCC8") {
+      records {
+        tdoId
+        engineId
+        startOffsetMs
+        stopOffsetMs
+        jsondata
+        assetId
+        userEdited
+      }
+    }
+  }
+

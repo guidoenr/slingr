@@ -1,0 +1,21 @@
+# JOB STATUS
+query jobStatus {
+    job(id: "22072706_zjDQHsNv9X") {
+      status
+      targetId
+      tasks {
+        records {  
+          status
+          taskPayload
+          #taskOutput
+          #outputString
+          failureReason
+          failureMessage
+          engine {
+            id
+            name        
+          }
+        }
+      }
+    }
+  }
