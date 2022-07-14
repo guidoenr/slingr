@@ -1,4 +1,4 @@
-# ------------------------------------ VIDEO - CHUNK
+# ------------------------------------ TRANSCRIPTION
 mutation {
     createJob(
       input: {
