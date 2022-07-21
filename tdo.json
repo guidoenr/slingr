@@ -1,0 +1,24 @@
+# CREATE TDO
+mutation createTDOWithAsset {
+    createTDOWithAsset(
+      input: {
+        startDateTime: 1533761172
+        stopDateTime: 1533761227
+        contentType: "image/jpeg"
+        assetType: "media"
+        addToIndex: true
+        uri: "https://vtn-dev-test-files.s3.amazonaws.com/media/image/celebrity-recognition-johnny-depp.jpeg"
+      }
+    ) {
+      id
+      status
+      assets {
+        records {
+          id
+          assetType
+          contentType
+          signedUri
+        }
+      }
+    }
+    }
