@@ -1,47 +1,22 @@
 # BATCH FOR ENTTIY RECOGNITION 
-mutation runFacialRecognitionImage($clusterId: ID!) {
-    createJob(input: {
-      targetId: "2150835722"
-      clusterId: $clusterId
-      tasks: [
-  
-        {
-          engineId: "e2af313b-9ae7-4a2c-83d3-6e5946ba618a"
-             executionPreferences: {
-              maxEngines: 10
-            parentCompleteBeforeStarting: true
-            priority:mutation createTDOWithAsset {
-                createTDOWithAsset(
-                  input: {
-                    startDateTime: 1533761172
-                    stopDateTime: 1533761227
-                    contentType: "image/jpeg"
-                    assetType: "media"
-                    addToIndex: true
-                    uri: "https://vtn-dev-test-files.s3.amazonaws.com/media/image/celebrity-recognition-johnny-depp.jpeg"
-                  }
-                ) {
-                  id
-                  status
-                  assets {
-                    records {
-                      id
-                      assetType
-                      contentType
-                      signedUri
-                    }
-                  }
-                }
-                } -5
-          }        
-        }
-  
-      ]
-      routes: []
-    }) {
-      id
-      targetId   
-      }
-  }
+mutation runFacialRecognitionImage {
+  createJob(input: {
+    targetId: "2150835722"
+    tasks: [
 
-  
+      {
+        engineId: "e2af313b-9ae7-4a2c-83d3-6e5946ba618a"
+       	executionPreferences: {
+      	  maxEngines: 10
+          parentCompleteBeforeStarting: true
+          priority: -5
+        }
+      }
+
+    ]
+    routes: []
+  }) {
+    id
+    targetId
+	}
+}
