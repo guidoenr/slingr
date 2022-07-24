@@ -1,0 +1,179 @@
+{
+  "$comment": [
+    "This file defines the rules for building in the CI/CD environment.",
+    "",
+    "IF YOU EDIT THIS FILE: you need to run 'make make' in the speechmatics-chunk directory.",
+    "",
+    "Each engine that can be built is represented here with all the parameters that make it unique. ",
+    "This file also defines which engines are 'enabled.' Enabled engines are built and deployed as part of",
+    "the CI/CD process. Disabled engines can still be built and deployed",
+    "",
+    "Each object in 'engines' has the following properties:",
+    "- key = id - ID of the engine in aiWARE",
+    "- edgeVersion - Version of the Engine Toolkit required. Only 3 matters, anything else is for reference",
+    "- language - Language code that must match a language code Speechmatics supports",
+    "- speakerSep - Is this a speaker separation engine? true or false",
+    "- smVersion - Verison of the Speechmatics image to use",
+    "- enabled - Should this engine be built as part of CI/CD? true or false",
+    "- note - any notes, ignored",
+    "",
+    "Each object in 'smVerisions' describes the properties that are needed by engines that",
+    "rely on that version of Speechmatics:",
+    "- registry - Docker registry that hosts the image for this version. Note that CI/CD uses the cached",
+    "  version of the image in registry.central.aiware.com, but this registry is needed to build the",
+    "  initial cache",
+    "- image - Pattern for the image name. the string 'LANGUAGE' will be replaced with the value ",
+    "  of the 'language' key from the 'engines' definition",
+    "- version - Version of this image. Also used as a tag to get the image",
+    "- licenseName - Name of the license value. Earlier versions o Speechmatics used a 'licenseKey', but",
+    "  later versions use a 'licenseToken'",
+    "- licenseKey - License key for this version of Speechmatics. Speechmatics support generates this in",
+    "  a file named like 'veritone-license.json' and sends it to us. This is the value stored in the",
+    "  'signedclaimstoken' field of that JSON file.",
+    "",
+    "The information in this file is used to construct the CI/CD Makefiles for this repo, as",
+    "well as being used by the build, publish and/or deploy scripts."
+  ],
+  "engines": {
+    "31523f94-ef4f-4fd7-a710-2929f3fe54c6": {
+      "engineName": "Speechmatics Speaker Separation (v9.0.1) - Turkish",
+      "edgeVersion": 3,
+      "language": "tr",
+      "speakerSep": true,
+      "smVersion": "sm901",
+      "cicdEnabled": true,
+      "enhanced": false,
+      "speakerIdOnSeries": "true"
+    },
+    "1bd00844-9a4b-437a-9e30-48df130f6fee": {
+      "engineName": "Speechmatics Speaker Separation Enhanced (v9.0.1) - Turkish",
+      "edgeVersion": 3,
+      "language": "tr",
+      "speakerSep": true,
+      "smVersion": "sm901",
+      "cicdEnabled": true,
+      "enhanced": true,
+      "speakerIdOnSeries": "true"
+    },
+    "87bb5442-7da8-4fdf-b40e-c0c5ae152f4d": {
+      "engineName": "Speechmatics Transcription (v9.0.1) - Turkish",
+      "edgeVersion": 3,
+      "language": "tr",
+      "speakerSep": false,
+      "smVersion": "sm901",
+      "cicdEnabled": true,
+      "enhanced": false,
+      "speakerIdOnSeries": "true"
+    },
+    "133b4863-443d-4eca-8d54-703c54b904eb": {
+      "engineName": "Speechmatics Transcription Enhanced (v9.0.1) - Turkish",
+      "edgeVersion": 3,
+      "language": "tr",
+      "speakerSep": false,
+      "smVersion": "sm901",
+      "cicdEnabled": true,
+      "enhanced": true,
+      "speakerIdOnSeries": "true"
+    },
+    "3b505e84-0a3d-4b8e-a453-c5886f269aa9": {
+      "engineName": "Speechmatics Speaker Separation (v9.1.0) - Ukrainian",
+      "edgeVersion": 3,
+      "language": "uk",
+      "speakerSep": true,
+      "smVersion": "sm91",
+      "cicdEnabled": true,
+      "enhanced": false
+    },
+    "62ba6cba-1dbc-4328-975f-6ecfd4250e96": {
+      "engineName": "Speechmatics Speaker Separation Enhanced (v9.1.0) - Ukrainian",
+      "edgeVersion": 3,
+      "language": "uk",
+      "speakerSep": true,
+      "smVersion": "sm91",
+      "cicdEnabled": true,
+      "enhanced": true
+    },
+    "605dc6f8-81dc-4673-8feb-6fdd5a9660e3": {
+      "engineName": "Speechmatics Transcription (v9.1.0) - Ukrainian",
+      "edgeVersion": 3,
+      "language": "uk",
+      "speakerSep": false,
+      "smVersion": "sm91",
+      "cicdEnabled": true,
+      "enhanced": false
+    },
+    "f2549719-7cf3-4d3c-9076-2f80d2d34a83": {
+      "engineName": "Speechmatics Transcription Enhanced (v9.1.0) - Ukrainian",
+      "edgeVersion": 3,
+      "language": "uk",
+      "speakerSep": false,
+      "smVersion": "sm91",
+      "cicdEnabled": true,
+      "enhanced": true
+    }
+  },
+  "smVersions": {
+    "sm6": {
+      "registry": "speechmatics-docker-prod-veritone.jfrog.io",
+      "image": "transcriber-LANGUAGE",
+      "version": "6.1.1_v2",
+      "licenseKey": "c9cfabddd9c6435e46850d25779b47a9aed24b14edc91d7e8e47772cc7c514ed"
+    },
+    "sm7": {
+      "registry": "speechmatics-docker-prod-veritone.jfrog.io",
+      "image": "transcriber-LANGUAGE",
+      "version": "7.0.0",
+      "licenseName": "licenseKey",
+      "licenseKey": "c9cfabddd9c6435e46850d25779b47a9aed24b14edc91d7e8e47772cc7c514ed"
+    },
+    "sm8": {
+      "registry": "speechmatics-docker-public.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "8.0.0",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkxBTlkiXSwiY29udHJhY3RpZCI6IjM0MSIsImlzX3RyaWFsIjpmYWxzZSwiZXhwIjoxNzAzODk0NDAwLCJqdGkiOiJjOTRkNTUwNTM5NGU0NTA1YmE4NzI1ODgzMmE5YjhkNCIsImlhdCI6MTU5NDA0NzE0MywiaXNzIjoiU3BlZWNobWF0aWNzIiwibmJmIjoxNTkzNTYxNjAwLCJzdWIiOiJWZXJpdG9uZSBJbmMifQ.ieDBS7JI-Ky_dz26SNJLmCEQAbs3_mi_ov85Wy8_3GDltt30fEIsiiJuBHhia42ikbdajAo6_n-oUvw1hLB6fpPuOW7csjfe-a4rnAZfsOpTZDwHuH6WJYOjRha8nXJCoChUl7PF7zMumKg1GbYVhtFM_aqPgEwELUHUeUVYWGhYx1m-8-V9k2b8SaUeciCKMs8RZaa2e3DkIRXv_QvXQOgKYy7kVLWkmi-ZpH0WpLGPI-QLwVN3qcaXtoXjIQNvcfQT_AAhNw5hrAteb59SOXty4rrhRzXbBSx0dmwVLGP-jVEyjAjxsFb92yfxZDK3HbGjVr_N0ZO8e_gShcfl3w"
+    },
+    "sm81": {
+      "registry": "speechmatics-docker-public.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "8.1.0",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkxBTlkiXSwiY29udHJhY3RpZCI6IjM0MSIsImlzX3RyaWFsIjpmYWxzZSwiZXhwIjoxNzAzODk0NDAwLCJqdGkiOiJjOTRkNTUwNTM5NGU0NTA1YmE4NzI1ODgzMmE5YjhkNCIsImlhdCI6MTU5NDA0NzE0MywiaXNzIjoiU3BlZWNobWF0aWNzIiwibmJmIjoxNTkzNTYxNjAwLCJzdWIiOiJWZXJpdG9uZSBJbmMifQ.ieDBS7JI-Ky_dz26SNJLmCEQAbs3_mi_ov85Wy8_3GDltt30fEIsiiJuBHhia42ikbdajAo6_n-oUvw1hLB6fpPuOW7csjfe-a4rnAZfsOpTZDwHuH6WJYOjRha8nXJCoChUl7PF7zMumKg1GbYVhtFM_aqPgEwELUHUeUVYWGhYx1m-8-V9k2b8SaUeciCKMs8RZaa2e3DkIRXv_QvXQOgKYy7kVLWkmi-ZpH0WpLGPI-QLwVN3qcaXtoXjIQNvcfQT_AAhNw5hrAteb59SOXty4rrhRzXbBSx0dmwVLGP-jVEyjAjxsFb92yfxZDK3HbGjVr_N0ZO8e_gShcfl3w"
+    },
+    "sm811": {
+      "registry": "speechmatics-docker-public.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "8.1.1",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkxBTlkiXSwiY29udHJhY3RpZCI6IjM0MSIsImlzX3RyaWFsIjpmYWxzZSwiZXhwIjoxNzAzODk0NDAwLCJqdGkiOiJjOTRkNTUwNTM5NGU0NTA1YmE4NzI1ODgzMmE5YjhkNCIsImlhdCI6MTU5NDA0NzE0MywiaXNzIjoiU3BlZWNobWF0aWNzIiwibmJmIjoxNTkzNTYxNjAwLCJzdWIiOiJWZXJpdG9uZSBJbmMifQ.ieDBS7JI-Ky_dz26SNJLmCEQAbs3_mi_ov85Wy8_3GDltt30fEIsiiJuBHhia42ikbdajAo6_n-oUvw1hLB6fpPuOW7csjfe-a4rnAZfsOpTZDwHuH6WJYOjRha8nXJCoChUl7PF7zMumKg1GbYVhtFM_aqPgEwELUHUeUVYWGhYx1m-8-V9k2b8SaUeciCKMs8RZaa2e3DkIRXv_QvXQOgKYy7kVLWkmi-ZpH0WpLGPI-QLwVN3qcaXtoXjIQNvcfQT_AAhNw5hrAteb59SOXty4rrhRzXbBSx0dmwVLGP-jVEyjAjxsFb92yfxZDK3HbGjVr_N0ZO8e_gShcfl3w"
+    },
+    "hydra1007": {
+      "registry": "speechmatics-docker-demo.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE-hydra",
+      "version": "1.0.0.7",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBCQSIsIkFNQ0MiLCJBUEQiLCJBUFIiLCJBU1MiLCJMQU5ZIiwiQU9QMiJdLCJjb250cmFjdGlkIjoiIiwiaXNfdHJpYWwiOnRydWUsImV4cCI6MTYxNzQ5NDQwMCwianRpIjoiMzdlNzJmMzk1ZWQ0NDE5ZmFjMDFiOTA0NjUxOTlhNDIiLCJpYXQiOjE2MTYwNjU1NzAsImlzcyI6IlNwZWVjaG1hdGljcyIsIm5iZiI6MTYxNjAyNTYwMCwic3ViIjoiVmVyaXRvbmUgSW5jIn0.Kk1aefGnrn8mwanG9Ike8MnUBZRZ07TqGTlL0gVdR0MtNwr0NHhKSRVytBg3LEGNogBizUDBup9tZhaK5OkMQ4FoymEdYd5erCBKmJB8zcHQgm7yALEaEcdN01-R1p73JURhckZC9seaNAjAgvbQ1SkFue_H6gId0XRH--TELzPzILUIQrBECLbnFmSuJz93hqxOLbajyXDj5ymKmCvyYdSosyDmrq5V_1bbZ4czea8gmEqcDjxQPMLsi3nikdvsx75r9VhS36YUBzPs2kILf4zKqPrfVkxrfofF0j6d2tT5ZBR9vkduOpuGzfQTWZ2hHhytjAwDkcaiofpIxU_d_A"
+    },
+    "sm82": {
+      "registry": "speechmatics-docker-demo.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "8.2.0",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkFPUDIiLCJMQU5ZIl0sImNvbnRyYWN0aWQiOiIiLCJpc190cmlhbCI6ZmFsc2UsImV4cCI6MTY0OTYzNTIwMCwianRpIjoiYjJiM2I2NDE5MTE3NDk1Njk4YTIwZmI5Y2I5NmI1YzMiLCJpYXQiOjE2NDQzMTE4MjgsImlzcyI6IlNwZWVjaG1hdGljcyIsIm5iZiI6MTY0NDI3ODQwMCwic3ViIjoiVmVyaXRvbmUgSW5jIn0.Pfr8uOf5jeZe-_TNfG3Vj6i-AD2_MtC1lEkKm5oWZ6bIhCiUY2vnPd7WCGV11_uYLl6oXhWHSGRqm2xObcyS-Y8ixsJnGmu6WQ88blzXv1GUZOuGs0M5C30tiprnU1QDhxyqrOU3BcfTtKT8NSWkhpOsK0WKs5BxDluvi97M-8kU81_afYJHtKGbAQdCtfhcrMpS3AqCI0JrmdeQnP7YADF0Ri2hI84Zjgrho-cLbOpfGttn9kGNswBgWQkwLk_364IPwDatk5IunzI_SS0oUY7stmleWf4j9G_UEKy1kOaLPYzzW3XvyDI-wI4M-TwpDWF9_BVdq2HszP2J2qKw_A"
+    },
+    "sm901": {
+      "registry": "speechmatics-docker-public.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "9.0.1",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkFPUDIiLCJMQU5ZIl0sImNvbnRyYWN0aWQiOiIzNDEiLCJpc190cmlhbCI6ZmFsc2UsImV4cCI6MTcwMzg5NDQwMCwianRpIjoiYTc1ODkzNjIzMDAzNDhmOGJmNzJkYTc5NWYzYzc0ZDgiLCJpYXQiOjE2NTM1ODA3NzIsImlzcyI6IlNwZWVjaG1hdGljcyIsIm5iZiI6MTY1MzUyMzIwMCwic3ViIjoiVmVyaXRvbmUgSW5jIn0.BBqx9So9q8dvx9dtWmRnOxDs5gSFjClLZORuxlDdOZ6SSuEI_QYbz-7dVMsZwGpaAH_20z3x6CoODQ13_-xLC_0ct13SyMv_qJsNtax_438kk2t3HxxHqU4Qtm3mfET677merOQ84tGKQZonoVRsVhePVI4YbKDbW7MDWGJjZKVoDYUBZUUizNba0a6N4w6Z9HY2CTcIKLwW1qLNtDkfMWVXk7l3RWnTVFgxZZzqJN3PrVivYIHnmUno0CP3Lt9bN6UEqWHEle7pSioNgk9y1cvcAdft5njHU_I0ctZ6U68c0B55w-TPnlA9TXcw0kg1f-u3a6DjfeYtJWEoPoeJ_A"
+    },
+    "sm91": {
+      "registry": "speechmatics-docker-public.jfrog.io",
+      "image": "batch-asr-transcriber-LANGUAGE",
+      "version": "9.1.0",
+      "licenseName": "licenseToken",
+      "licenseKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZWF0dXJlcyI6WyJNQVBSVCIsIk1BUEJBIiwiQU1DQyIsIkFQRCIsIkFQUiIsIkFTUyIsIkFPUDIiLCJMQU5ZIl0sImNvbnRyYWN0aWQiOiIzNDEiLCJpc190cmlhbCI6ZmFsc2UsImV4cCI6MTcwMzg5NDQwMCwianRpIjoiYTc1ODkzNjIzMDAzNDhmOGJmNzJkYTc5NWYzYzc0ZDgiLCJpYXQiOjE2NTM1ODA3NzIsImlzcyI6IlNwZWVjaG1hdGljcyIsIm5iZiI6MTY1MzUyMzIwMCwic3ViIjoiVmVyaXRvbmUgSW5jIn0.BBqx9So9q8dvx9dtWmRnOxDs5gSFjClLZORuxlDdOZ6SSuEI_QYbz-7dVMsZwGpaAH_20z3x6CoODQ13_-xLC_0ct13SyMv_qJsNtax_438kk2t3HxxHqU4Qtm3mfET677merOQ84tGKQZonoVRsVhePVI4YbKDbW7MDWGJjZKVoDYUBZUUizNba0a6N4w6Z9HY2CTcIKLwW1qLNtDkfMWVXk7l3RWnTVFgxZZzqJN3PrVivYIHnmUno0CP3Lt9bN6UEqWHEle7pSioNgk9y1cvcAdft5njHU_I0ctZ6U68c0B55w-TPnlA9TXcw0kg1f-u3a6DjfeYtJWEoPoeJ_A"
+    }
+  }
+}
