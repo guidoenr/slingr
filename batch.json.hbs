@@ -51,13 +51,13 @@ input: {
           },
           {
             referenceId: "si-output"
-            mode: chunk,
+            mode: chunk
             type: output
           }
         ]
       },
       {
-        engineId: "e2af313b-9ae7-4a2c-83d3-6e5946ba618a"
+        engineId: "{{{ENGINE_ID}}}"
         payload: {
           COMMA_CATCHER: "true"
         }
@@ -67,12 +67,12 @@ input: {
         ioFolders: [
           {
             referenceId: "engine-input"
-            mode: chunk,
+            mode: chunk
             type: input
           },
           {
             referenceId: "engine-output"
-            mode: chunk,
+            mode: chunk
             type: output
           }
         ]
@@ -93,20 +93,20 @@ input: {
   ]
   routes: [
       {
-        "parentIoFolderReferenceId": "wsa-output"
-        "childIoFolderReferenceId": "ai-input"
+        parentIoFolderReferenceId: "wsa-output"
+        childIoFolderReferenceId: "ai-input"
       },
       {
-        "parentIoFolderReferenceId": "wsa-output"
-        "childIoFolderReferenceId": "si-input"
+        parentIoFolderReferenceId: "wsa-output"
+        childIoFolderReferenceId: "si-input"  
       },
       {
-        "parentIoFolderReferenceId": "si-output"
-        "childIoFolderReferenceId": "engine-input"
+        parentIoFolderReferenceId: "si-output"
+        childIoFolderReferenceId: "engine-input"
       },
       {
-        "parentIoFolderReferenceId": "engine-output"
-        "childIoFolderReferenceId": "ow-input"
+        parentIoFolderReferenceId: "engine-output"
+        childIoFolderReferenceId: "ow-input"
       }
     ]
 }

@@ -98,19 +98,19 @@ mutation {
     ],
     "routes": [
       {
-        "parentIoFolderReferenceId": "wsa-output",
+        parentIoFolderReferenceId: "wsa-output",
         "childIoFolderReferenceId": "ai-input"
       },
       {
-        "parentIoFolderReferenceId": "wsa-output",
+        parentIoFolderReferenceId: "wsa-output",
         "childIoFolderReferenceId": "si-input"
       },
       {
-        "parentIoFolderReferenceId": "si-output",
+        parentIoFolderReferenceId: "si-output",
         "childIoFolderReferenceId": "engine-input"
       },
       {
-        "parentIoFolderReferenceId": "engine-output",
+        parentIoFolderReferenceId: "engine-output",
         "childIoFolderReferenceId": "ow-input"
       }
     ]
